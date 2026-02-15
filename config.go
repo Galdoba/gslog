@@ -2,7 +2,6 @@ package gslog
 
 import (
 	"io"
-	"os"
 )
 
 type Configuration struct {
@@ -13,17 +12,19 @@ type Configuration struct {
 	RoutineTimeoutSeconds int
 	MaximumRoutines       int
 	ConditionalWriters    map[string]ConditionFunc
+	Handlers              map[string]Handler
 }
 
 func DefaultConfiguration() Configuration {
-	return Configuration{
+	cfg := Configuration{
 		BufferSize:            1024,
-		Writer:                os.Stderr,
 		Levels:                defaultLevels(),
 		MinimumLevel:          INFO,
 		RoutineTimeoutSeconds: 30,
 		MaximumRoutines:       1,
 	}
+	cfg.Handlers = make(map[string]Handler)
+	return cfg
 }
 
 type ConditionFunc func(string) bool

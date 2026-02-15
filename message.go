@@ -2,6 +2,7 @@ package gslog
 
 import (
 	"fmt"
+	"runtime"
 	"strings"
 	"time"
 )
@@ -29,14 +30,17 @@ type logEntry struct {
 	context   map[string]any
 }
 
-func (l *logger) packFields(m logEntry) (EntryDTO, error) {
+func packFields(m logEntry) (EntryDTO, error) {
 	if m.context == nil {
 		m.context = make(map[string]any)
 	}
 	if m.level.Importance <= DEBUG.Importance {
-		m.file = "file"
-		m.funcName = "caller"
-		m.lineNum = 42
+		pc, file, line, ok := runtime.Caller(3)
+		if ok {
+			m.file = file
+			m.lineNum = line
+			m.funcName = runtime.FuncForPC(pc).Name()
+		}
 		m.context[fl_file] = m.file
 		m.context[fl_funcName] = m.funcName
 		m.context[fl_lineNum] = m.lineNum
