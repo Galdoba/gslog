@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {"time":"2026-02-11T17:53:24.8929091+10:00","level":"INFO","message":"message 0"}
 {"time":"2026-02-11T17:53:25.005459+10:00","level":"INFO","message":"message 1"}
 {"time":"2026-02-11T17:53:25.0760139+10:00","level":"INFO","message":"message 2"}
@@ -23,3 +24,11 @@
 {"time":"2026-02-11T17:53:26.4905473+10:00","level":"INFO","message":"message 22"}
 {"time":"2026-02-11T17:53:26.5616067+10:00","level":"INFO","message":"message 23"}
 {"time":"2026-02-11T17:53:26.6321301+10:00","level":"INFO","message":"message 24"}
+=======
+{"time":"2026-02-15T23:43:18.84219101+10:00","level":"INFO","message":"Ping"}
+{"time":"2026-02-15T23:43:19.842697227+10:00","level":"INFO","message":"Ping 2"}
+{"time":"2026-02-15T23:44:27.190862468+10:00","level":"INFO","message":"Ping"}
+{"time":"2026-02-15T23:44:28.191303486+10:00","level":"INFO","message":"Ping 2"}
+{"time":"2026-02-15T23:46:01.850931537+10:00","level":"INFO","message":"Ping"}
+{"time":"2026-02-15T23:52:25.187500067+10:00","level":"DEBUG","message":"Ping 2","context":{"answer":42,"file":"/home/galdoba/go/src/github.com/Galdoba/gslog/slogger_test.go","func":"github.com/Galdoba/gslog.Test_logger_start","line":23}}
+>>>>>>> 5c480458ebfc854bd55fe6395e76191ccf406b82
