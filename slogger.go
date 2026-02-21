@@ -19,6 +19,7 @@ func init() {
 		panic(fmt.Errorf("gslog init failed: %w", err))
 	}
 	bf = &basicFormatter{}
+	defaultSlogger.formatter = bf
 }
 
 type logger struct {
@@ -29,6 +30,7 @@ type logger struct {
 	running      bool
 	minimumLevel Level
 	autofields   map[string]any
+	formatter    Formatter
 }
 
 func New(cfg Configuration) (*logger, error) {
@@ -73,6 +75,12 @@ func (l *logger) handleMessage(m logEntry) (EntryDTO, error) {
 	data, err := json.Marshal(&dto)
 	if err != nil {
 		return dto, fmt.Errorf("failed to marshal message: %w", err)
+	}
+	switch l.writer {
+	case os.Stderr, os.Stdout:
+		if l.formatter != nil {
+			data = []byte(l.formatter.Format(dto))
+		}
 	}
 	data = append(data, []byte("\n")...)
 	if _, err := l.writer.Write(data); err != nil {
@@ -121,4 +129,8 @@ func Trace(msg string, context ...any) {
 
 func SetWriter(w io.Writer) {
 	defaultSlogger.writer = w
+}
+
+func SetFormatter(f Formatter) {
+	defaultSlogger.formatter = f
 }

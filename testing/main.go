@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	f, _ := os.Create(`/home/galdoba/go/src/github.com/Galdoba/gslog/testing/testLog.txt`)
+	f, _ := os.Create(`./testLog.txt`)
 	gslog.SetWriter(f)
 	for i := range 999 {
 		time.Sleep(time.Millisecond * 70)

@@ -5,7 +5,8 @@ import (
 )
 
 const (
-	DIR = "dir"
+	DIR    = "dir"
+	STRICT = "strict"
 )
 
 var DirFlag = &cli.StringFlag{
@@ -23,4 +24,13 @@ var DirFlag = &cli.StringFlag{
 	OnlyOnce:    false,
 
 	ValidateDefaults: false,
+}
+
+var GlobalStrict = &cli.BoolFlag{
+	Name:        STRICT,
+	HideDefault: true,
+	Usage:       "stop process on any proble, encountered",
+	Aliases:     []string{"s"},
+	TakesFile:   false,
+	OnlyOnce:    true,
 }
